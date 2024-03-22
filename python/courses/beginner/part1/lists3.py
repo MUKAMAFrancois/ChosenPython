@@ -60,6 +60,25 @@ print(numbers)  # Output: [1, 2, 3, 4, 6, 7, 8, 9]
 index_of_6 = numbers.index(6)
 print(index_of_6)  # Output: 4
 
+
+
+
+
+names=["alice","bob","charlie","david"]
+
+for index, name in enumerate(names):
+    print(f"{name} has index of {index}")
+
+for i in range(len(names)):
+    print(f"{names[i]} has index of {i}")
+
+for name in names:
+    print(f"{name} has index of {names.index(name)}")
+
+
+
+
+
 # Count method - returns the number of occurrences of a specified value
 count_of_6 = numbers.count(6)
 print(count_of_6)  # Output: 1
@@ -75,6 +94,10 @@ print(numbers)  # Output: [9, 8, 7, 6, 4, 3, 2, 1]
 # Copy method - returns a shallow copy of the list
 numbers_copy = numbers.copy()
 print(numbers_copy)  # Output: [9, 8, 7, 6, 4, 3, 2, 1]
+
+
+
+
 
 
 
@@ -189,8 +212,24 @@ print("List with uppercase strings:", uppercase_words)
 # List with uppercase strings: ['APPLE', 'BANANA', 'CHERRY']
 
 
+names=["alice","bob","charlie","david"]
+names2=[]
+
+for name in names:
+    names2.append(name[0].upper() +name[1:])
+    
+    
+print(names2) # ['Alice', 'Bob', 'Charlie', 'David']
 
 
+
+#enumerate() is a built-in Python function used to iterate over
+# a sequence (such as a list, tuple, or string) while keeping track of the index of each item.
+# It returns an enumerate object, which yields pairs of index and value for each item in the sequence.
+
+#syntax:  enumerate(iterable, start=0)
+#iterable: The sequence to be iterated over.
+#start (optional): The index to start counting from. By default, it is 0.
 
 # Example 3: Using enumerate() Function with Lists
 # Given a list of names, print each name along with its index
@@ -209,52 +248,3 @@ for index, name in enumerate(names):
 # Index 1: Bob
 # Index 2: Charlie
 # Index 3: David
-
-
-
-
-
-
-#enumerate() is a built-in Python function used to iterate over
-# a sequence (such as a list, tuple, or string) while keeping track of the index of each item.
-# It returns an enumerate object, which yields pairs of index and value for each item in the sequence.
-
-#syntax:  enumerate(iterable, start=0)
-#iterable: The sequence to be iterated over.
-#start (optional): The index to start counting from. By default, it is 0.
-
-""" 
-
-#### Iterating Over Lists
-1. Using for Loops with Lists
-2. Looping Through Lists with List Comprehensions
-3. Using enumerate() Function with Lists
-4. Looping Over Multiple Lists Simultaneously
-
-#### Common List Patterns and Techniques
-1. Finding Maximum and Minimum Values in a List
-2. Checking for Duplicates in a List
-3. Flattening Nested Lists
-4. List Reversal
-5. List Unpacking
-6. Zip and Unzip Lists
-
-#### Advanced List Topics
-1. List Mutability vs. Immutability
-2. Deep Copy vs. Shallow Copy
-3. List Memory Management
-4. Using Lists in Functional Programming
-5. List Performance and Efficiency Considerations
-
-#### Practical Applications and Exercises
-1. Building a To-Do List Application
-2. Implementing a Simple Database with Lists
-3. Solving Coding Challenges with Lists
-5. Implementing Lists in Real-world Projects
-
-#### Conclusion
-1. Summary of Key Concepts
-2. Next Steps in Mastering Lists
-3. Further Resources and References
-
- """
