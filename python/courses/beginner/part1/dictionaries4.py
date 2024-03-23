@@ -350,8 +350,16 @@ merged_dict_conflict = {**dict1, **dict5}
 print(merged_dict_conflict)  # Output: {'a': 1, 'b': 7, 'c': 10, 'd': 5, 'e': 6}
 
 
+#merge two lists into dictionary
+countries =["Rwanda","Cameroon","England"]
 
+cities=["Kigali","Yaounde","London"]
 
+if len(countries) == len(cities):
+    dict1={countries[i]:cities[i] for i in range(len(cities))}
+    
+else:
+    print("Your lists are not of equal length")
 
 
 
