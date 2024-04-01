@@ -13,17 +13,16 @@ class BlogModel(Base):
     id=Column(Integer,primary_key=True,index=True)
     title=Column(String)
     body=Column(String)
-    # author_id=Column(Integer,ForeignKey('users.id'))
-
-    # author=relationship('User',back_populates='blogs')
-
+    author_id=Column(Integer,ForeignKey('users.id'))
+    author=relationship('UserModel',back_populates='blogs')
 
 
-# class User(Base):
-#     __tablename__='users'
-#     id=Column(Integer,primary_key=True,index=True)
-#     username=Column(String)
-#     email=Column(String)
-#     password=Column(String)
 
-#     blogs=relationship('Blog',back_populates='author')
+class UserModel(Base):
+    __tablename__='users'
+    id=Column(Integer,primary_key=True,index=True)
+    username=Column(String)
+    email=Column(String)
+    password=Column(String)
+    blogs=relationship('BlogModel',back_populates='author')
+    

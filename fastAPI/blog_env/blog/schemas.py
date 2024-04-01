@@ -1,11 +1,82 @@
 #schemas.py
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel,validator,EmailStr,constr
 
 
 
 
+#user schemas
+class UserCreate(BaseModel):
+    email:EmailStr
+    username:str 
+    password:str 
+
+
+    @validator('password')
+    def validate_password_strength(cls,password:str)->str:
+        special_characters='!@#$%^&*()-+'
+        if len(password)<8:
+            raise ValueError('Password must be at least 8 characters long')
+        if not any(char.isdigit() for char in password):
+            raise ValueError('Password must contain a number')
+        if not any(char.isupper() for char in password):
+            raise ValueError('Password must contain an uppercase letter')
+        if not any(char.islower() for char in password):
+            raise ValueError('Password must contain a lowercase letter')
+        if not any(char in special_characters for char in password):
+            raise ValueError('Password must contain a special character')
+        return password
+    
+    @validator('username')
+    def validate_username(cls,username:str)->str:
+        if len(username)<4:
+            raise ValueError('Username must be at least 4 characters long')
+        return username
+    
+    @validator('email')
+    def validate_email(cls,email:EmailStr)->EmailStr:
+        symbols=['@','.']
+        if email.split('@')[1]=='':
+            raise ValueError('Invalid email')
+        if not any(char in symbols for char in email):
+            raise ValueError('Invalid email')
+        return email
+    
+
+class User(UserCreate):
+    id:int
+
+    class Config:
+        from_attributes=True
+
+class ShowUser(BaseModel):
+    email:EmailStr 
+    username:str 
+    class Config:
+        from_attributes=True
+
+class UserListResponse(BaseModel):
+    message:str
+    data:List[User]
+
+
+
+class Login(BaseModel):
+    email:EmailStr
+    password:str
+
+class Token(BaseModel):
+    access_token:str
+    token_type:str
+
+# class TokenData(BaseModel):
+#     email:EmailStr
+
+  
+
+
+#blog schemas
 
 
 class BlogCreate(BaseModel):
@@ -34,6 +105,7 @@ class BlogCreate(BaseModel):
     
 class Blog(BlogCreate):
     id:int
+    author:ShowUser
     class Config:
       
         from_attributes=True
@@ -49,47 +121,3 @@ class BlogListResponse(BaseModel):
 
 
 
-
-
-# class UserCreate(BaseModel):
-#     email:EmailStr
-#     username:str 
-#     password:str 
-
-
-#     @validator('password')
-#     def validate_password_strength(cls,password:str)->str:
-#         special_characters='!@#$%^&*()-+'
-#         if len(password)<8:
-#             raise ValueError('Password must be at least 8 characters long')
-#         if not any(char.isdigit() for char in password):
-#             raise ValueError('Password must contain a number')
-#         if not any(char.isupper() for char in password):
-#             raise ValueError('Password must contain an uppercase letter')
-#         if not any(char.islower() for char in password):
-#             raise ValueError('Password must contain a lowercase letter')
-#         if not any(char in special_characters for char in password):
-#             raise ValueError('Password must contain a special character')
-#         return password
-    
-#     @validator('username')
-#     def validate_username(cls,username:str)->str:
-#         if len(username)<4:
-#             raise ValueError('Username must be at least 4 characters long')
-#         return username
-    
-#     @validator('email')
-#     def validate_email(cls,email:EmailStr)->EmailStr:
-#         symbols=['@','.']
-#         if email.split('@')[1]=='':
-#             raise ValueError('Invalid email')
-#         if not any(char in symbols for char in email):
-#             raise ValueError('Invalid email')
-#         return email
-    
-
-# class User(UserCreate):
-#     id:int
-
-#     class Config:
-#         orm_mode=True
