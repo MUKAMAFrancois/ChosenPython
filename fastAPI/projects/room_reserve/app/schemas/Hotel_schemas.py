@@ -6,6 +6,9 @@ from bson import ObjectId
 from pydantic import BaseModel, Field, validator
 from fastapi import UploadFile
 
+from app.database import PyObjectId
+from app.schemas.user_schemas import UserSchema
+
 
 class HotelLocation(BaseModel):
     hotel_id: ObjectId  # Reference to the hotel
@@ -23,7 +26,7 @@ class HotelPrice(BaseModel):
 
 class HotelTestimonials(BaseModel):
     hotel_id: ObjectId  # Reference to the hotel
-    witnessed_by: ObjectId  # Reference to the user
+    witnessed_by: ObjectId  # Reference to the User
     message:str
 
 class HotelFeatures(BaseModel):
@@ -38,7 +41,7 @@ class HotelFeatures(BaseModel):
     has_water_pool:bool
 
 class HotelSchema(BaseModel):
-    id:Optional[ObjectId]=Field(default_factory=ObjectId,alias="_id")
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     hotel_name:str = Field(..., description="Name of the hotel")
     hotel_location:HotelLocation = Field(..., description="Location of the hotel")
     hotel_description:str = Field(..., description="Description of the hotel")
@@ -48,8 +51,8 @@ class HotelSchema(BaseModel):
     hotel_price:HotelPrice = Field(..., description="Price of the hotel")
     hotel_category:str = Field(..., description="Category of the hotel '5-star', '4-star', '3-star', '2-star', '1-star'")
     number_of_rooms:int = Field(..., description="Number of rooms in the hotel")
-    thumnails:List[str] =[Field(...,description="Thumbnails of the hotel")]
-    testimonials:List[HotelTestimonials] = [Field(...,description="Testimonials of the hotel")]
+    thumnails:List[str] =Field(...,description="Thumbnails of the hotel")
+    testimonials:List[HotelTestimonials] = Field(...,description="Testimonials of the hotel")
     hotel_features:HotelFeatures
     
     @validator('hotel_price')
@@ -76,3 +79,52 @@ class HotelSchema(BaseModel):
         if v <= 0:
             raise ValueError("Number of rooms must be a positive integer")
         return v
+    
+    class Config:
+        allowed_population_field_name=True
+        arbitrary_types_allowed=True
+        json_encoders={
+            ObjectId:str
+        }
+        schema_extra = {
+            "example": {
+                "hotel_name": "Hotel Name",
+                "hotel_location": {
+                    "hotel_id": "hotel_id",
+                    "city": "City",
+                    "state": "State",
+                    "country": "Country"
+                },
+                "hotel_description": "Hotel Description",
+                "hotel_image_url": "Hotel Image URL",
+                "is_onDiscount": "True",
+                "discount_percent": 20,
+                "hotel_price": {
+                    "hotel_id": "hotel_id",
+                    "perday_price": 100,
+                    "perweek_price": 500,
+                    "permonth_price": 2000
+                },
+                "hotel_category": "5-star",
+                "number_of_rooms": 100,
+                "thumnails": ["Thumbnail 1", "Thumbnail 2"],
+                "testimonials": [
+                    {
+                        "hotel_id": "hotel_id",
+                        "witnessed_by": "witnessed_by",
+                        "message": "Testimonial Message"
+                    }
+                ],
+                "hotel_features": {
+                    "hotel_id": "hotel_id",
+                    "has_free_wifi": "True",
+                    "has_air_conditioning": "True",
+                    "has_parking": "True",
+                    "has_restaurant": "True",
+                    "offer_breakfast": "True",
+                    "pets_allowed": "True",
+                    "near_the_city_center": "True",
+                    "has_water_pool": "True"
+                }
+            }
+        }

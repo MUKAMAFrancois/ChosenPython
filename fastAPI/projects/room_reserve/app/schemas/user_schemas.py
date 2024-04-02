@@ -1,11 +1,11 @@
 #user_schemas.py
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 from datetime import date
 from bson import ObjectId
 from pydantic import BaseModel, EmailStr, Field, validator
 from fastapi import UploadFile
 
-from app.database import PythonObjectEncoder
+from app.database import PyObjectId
 
 
 
@@ -16,7 +16,7 @@ class UserLocation(BaseModel):
     country: str
 
 class UserSchema(BaseModel):
-    id:PythonObjectEncoder=Field(default_factory=PythonObjectEncoder,alias="_id")
+    id:PyObjectId=Field(default_factory=PyObjectId,alias="_id")
     username:str = Field(...)
     email:EmailStr = Field(...)
     password:str = Field(...)
@@ -29,6 +29,7 @@ class UserSchema(BaseModel):
     starting_date_of_booking: Optional[date] = Field(...)
     ending_date_of_booking: Optional[date] = Field(...)
     number_of_people_for_hotel:Optional[int] = Field(...)
+    hotels_booked:Optional[List[ObjectId]] = Field(default_factory=list)
 
 
     @validator("phone_number")
