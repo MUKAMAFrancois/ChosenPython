@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from routers.users_routes import userRouter
+import models
+from config.database import engine
 
 
 
@@ -52,6 +54,9 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+models.user.Base.metadata.create_all(bind=engine)
+models.hotel.Base.metadata.create_all(bind=engine)
 
 
 app.include_router(userRouter)

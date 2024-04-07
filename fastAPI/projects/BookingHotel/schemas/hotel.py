@@ -1,7 +1,7 @@
 from datetime import date
 from enum import Enum
 from typing import List, Optional
-from pydantic import BaseModel,EmailStr,validator,HttpUrl
+from pydantic import BaseModel,validator,HttpUrl
 from fastapi import UploadFile, File
 
 
@@ -66,6 +66,14 @@ class HotelFeatures(BaseModel):
     hasWaterPool:Optional[bool] = False
     nearTheCityCenter:Optional[bool] = False
 
+    @validator('hasFreeWifi', 'hasAirConditioning', 
+               'hasParking', 'hasRestaurant', 'offerBreakfast', 
+               'petsAllowed', 'hasWaterPool', 'nearTheCityCenter')
+    def validate_boolean_property(cls, value):
+        if not isinstance(value, bool):
+            raise ValueError('Property must be a boolean value')
+        return value
+
 
 class HotelCategory(str,Enum):
     one_star="1 Star"
@@ -80,6 +88,8 @@ class HotelSchema(BaseModel):
     hotelLocation:HotelLocation
     hotelPrice:HotelPrice
     hotelFeatures:HotelFeatures
+    isHotelBooked:Optional[bool] =False
+    gotSubscription:Optional[bool] = False
     hotelTestimonials:Optional[List[HotelTestimonial]] = []
     isOnDiscount:Optional[bool] = False
     discountPercent:Optional[float] = 0.0

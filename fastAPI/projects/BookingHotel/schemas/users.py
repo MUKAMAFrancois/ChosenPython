@@ -4,7 +4,6 @@ from datetime import date
 from enum import Enum
 from typing import List, Optional
 from pydantic import BaseModel,EmailStr,validator
-from fastapi import UploadFile, File
 
 from schemas.hotel import Hotel
 
@@ -19,14 +18,11 @@ class UserRole(str,Enum):
     admin="admin"
 
 class UserLocation(BaseModel):
-    country:str
-    city:str
-    state:str
-    street:str
-    zipCode:str
-
-
-
+    country: str
+    city: str
+    state: str
+    street: str
+    zipCode: str
 
 
 class UserSchema(BaseModel):
@@ -35,13 +31,15 @@ class UserSchema(BaseModel):
     password: str
     phoneNumber: str
     userRole: UserRole
-    profilePic: UploadFile = File(None)
-    hasBookedHotel:Optional[bool] = False
+    hasSubscribed: Optional[bool] = False
+    profilePic: Optional[str] = None
+    hasBookedHotel: Optional[bool] = False
     location:UserLocation
-    startingDateOfStay:Optional[date] = None
-    endingDateOfStay:Optional[date] = None
-    numberOfPeopleToBookWith:Optional[int] = 1
+    startingDateOfStay: Optional[date] = None
+    endingDateOfStay: Optional[date] = None
+    numberOfPeopleToBookWith: Optional[int] = 1
     hotelsBooked: Optional[List[Hotel]] = []
+
 
     @validator('password')
     def validate_password_strength(cls,password:str)->str:
@@ -79,11 +77,14 @@ class UserSchema(BaseModel):
 
 
 class User(UserSchema):
-        id:int
-        class Config:
-            from_attributes=True
+    id: Optional[int]
 
-            json_schema_extra = {
+    class Config:
+        from_attributes = True
+        orm_mode = True
+        populate_by_name = True
+
+        json_schema_extra = {
                 "example": {
                     "username": "john_doe",
                     "email": "john@gmail.com",
