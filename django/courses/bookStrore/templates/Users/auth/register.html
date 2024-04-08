@@ -1,0 +1,71 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<link rel="stylesheet" href="{% static 'css/Users/register.css' %}">
+<style>
+    .error{
+        color: red;
+    
+    }
+</style>
+<body>
+
+    {% block content %}
+    <main>
+        <div class="login">
+            <h1>Register</h1>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                <input 
+                    type="text" 
+                    name="first_name" 
+                    placeholder="First Name"
+                    value="{{form.first_name.value | default:''}}"
+                    >
+                <input 
+                    type="text" 
+                    name="last_name" 
+                    placeholder="Last Name"
+                    value="{{form.last_name.value | default:''}}"
+                    >
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email"
+                    value="{{form.email.value | default:''}}"
+                    >
+                <input 
+                    type="password" 
+                    name="password" 
+                    placeholder="Password"
+                    value="{{form.password.value | default:''}}"
+                    >
+                <input 
+                    type="password" 
+                    name="confirm_password" 
+                    placeholder="Confirm Password"
+                    value="{{form.confirm_password.value | default:''}}"
+                    >
+                <button type="submit">Register</button>
+            </form>
+            <div class="have-an-account">
+                <p>Already Have an account? <a href="{% url 'login' %}">Login</a></p>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+
+   
+    
+</body>
+</html>

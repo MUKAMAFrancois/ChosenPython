@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<link rel="stylesheet" href="{% static 'css/Users/login.css' %}">
+
+<style>
+    .error{
+        color: red;
+    }
+</style>
+<body>
+
+    {% block content %}
+    <main>
+        <div class="login">
+            <h1>Login</h1>
+            <form action="{% url 'login'%}" method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="error">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Email"
+                    value="{{form.email.value | default:''}}"
+                    >
+                <input  
+                    type="password" 
+                    name="password" 
+                    placeholder="Password"
+                    value="{{form.password.value | default:''}}"
+                    >
+                <button type="submit">Login</button>
+            </form>
+            <div class="have-an-account">
+                <p>Don't Have an account? <a href="{% url 'signup' %}">Register</a></p>
+            </div>
+
+            <div class="lost-password">
+                <p>Lost your password? <a href="">Reset Password</a></p>
+            </div>
+        </div>
+    </main>
+
+    {% endblock %}
+
+
+    
+</body>
+</html>

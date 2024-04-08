@@ -1,6 +1,7 @@
 
 {% extends 'common/base.html'%}
-{%load static %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +9,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title%} HomePage-Book Store {%endblock%}</title>
 </head>
-<link rel="stylesheet" href="{% static 'css/home.css'%}">
+
+
+
 <body>
 
+<main>
     {% block content%}
+    <div class="book_list">
+        {% for book in books %}
+        <a href="{% url 'bookDetail' book.id %}" class="single-book">
+            <img src="{{ book.orImageUrl }}" alt="Book Image">
+            <h3>{{ book.title }}</h3>
+            <p>Author(s): 
+                {% for author in book.authors.all %}
+                     {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+
+            <!-- 
+                {% if not forloop.last %}, {% endif %} - This is a conditional statement 
+                that checks if the current iteration is the last one in the loop. 
+                Django provides a special variable called forloop.last 
+                that is True for the last iteration and False for all other iterations.
+             -->
+            <p>{{ book.pageCount }} Pages. &spades; <span>Rating: {{ book.averageRating}}/5.0</span></p>
+        </a>
+        {% endfor %}
+    </div>
+    
 
 
-
-
-
-    {% endblock%}
+{% endblock%}
+</main>
     
 </body>
 </html>

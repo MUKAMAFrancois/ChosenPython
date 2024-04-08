@@ -26,6 +26,8 @@ class BookModel(models.Model):
     shortDescription = models.CharField(max_length=255,verbose_name='Short Decription')
     releasedAt = models.DateField(auto_now_add=True, verbose_name='Released At')
     authors = models.ManyToManyField(AuthorModel, related_name='books')
+    bookImage=models.ImageField(upload_to='bookImages', verbose_name='Book Image',null=True,blank=True)
+    orImageUrl=models.URLField(verbose_name='Or Image URL',null=True,blank=True)
 
 
     class Meta:

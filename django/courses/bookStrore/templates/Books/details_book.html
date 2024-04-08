@@ -1,0 +1,34 @@
+{% extends 'common/base.html' %}
+{% load static %}
+<title>{% block title%} {{book.title}}{%endblock%}</title>
+
+{% block content%}
+<div class="description">
+    <img class="description-image" src="{{book.orImageUrl}}" alt="">
+   <div class="right-details">
+        <h1>{{book.title}}</h1>
+        <p>Written By: <span class="span">
+             {% for author in book.authors.all %}
+                 {{ author.first_name }} {{ author.last_name }} {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </span></p>
+        <p>Released at: <span class="span">{{book.releasedAt}}</span></p>
+        <p>Page Count: <span class="span">{{book.pageCount}} Pages</span></p>
+        <p class="read-text">
+            {{book.longDescription}}
+        </p>
+        <p class="sameAuthor">Read Similar Books of <a href="">The Same Author</a> </p>
+        <p class="login-for-review"><a href="">Login</a> to write The Review</p>
+
+        <form action="" method="post">
+            <h2>Leave Your Review</h2>
+            <textarea name="write-review" id="" cols="30" rows="10" placeholder="Write Review">
+
+            </textarea>
+            <button type="submit">Submit</button>
+        </form>
+   </div>
+</div>
+
+{% endblock %}
+
