@@ -18,15 +18,47 @@
             {{book.longDescription}}
         </p>
         <p class="sameAuthor">Read Similar Books of <a href="">The Same Author</a> </p>
-        <p class="login-for-review"><a href="">Login</a> to write The Review</p>
-
-        <form action="" method="post">
+        <p>
+            Rating:
+            {% if average_rating %}
+                <span class="span">{{ average_rating|floatformat:1 }}/5.0</span>
+            {% else %}
+                <span class="span">Not rated yet</span>
+            {% endif %}
+        </p>
+        {% if user.is_authenticated %}
+            <form action="{% url 'bookDetail' book.id %}" method="post" id="rating_form" >
+                {% csrf_token %}
+                <select name="rating" id="">
+                    {% for value, label in rating_form.fields.rating.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+                <button class="rate-btn" type="submit">Rate</button>
+            </form>
             <h2>Leave Your Review</h2>
-            <textarea name="write-review" id="" cols="30" rows="10" placeholder="Write Review">
+            <form action="{% url 'bookDetail' book.id %}" method="post" id="review_form">
+                {% csrf_token %}
+                <textarea 
+                    name="review" id="" cols="30" rows="10" 
+                    placeholder="Write Review"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        {% else %}
+            <p class="login-for-review"><a href="{% url 'login' %}?next={{request.path}}">Login</a> to write The Review</p>
+        {% endif %}
 
-            </textarea>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="reviews">
+            <h4>Recent Reviews</h4>
+            {% for review in reviews %}
+                <div class="single-review">
+                    <p>{{review.reviewContent}}</p>
+                    <p class="reviewer">By: {{review.reviewer.username}} at {{review.createdAt}}</p>
+                </div>
+            {%endfor%}
+        </div>
+
+       
    </div>
 </div>
 

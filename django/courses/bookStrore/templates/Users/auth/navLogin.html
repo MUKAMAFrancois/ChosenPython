@@ -1,0 +1,28 @@
+<style>
+      nav{
+        position: fixed;
+        top:0;
+        background: #333;
+        color:#fff;
+        left:0;
+        right: 0;
+    }
+    nav ul{
+        display: flex;
+        justify-content: flex-start;
+    }
+    nav ul li{
+        list-style: none;
+        margin-right: 50px;
+    }
+    li a{
+        color:#fff;
+        text-decoration: none;
+    }
+</style>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="">About Us</a></li>
+    </ul>
+</nav>

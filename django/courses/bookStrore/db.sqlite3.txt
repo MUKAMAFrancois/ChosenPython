@@ -1,0 +1,1 @@
+Books of the same Author=========Blog application::= Design Frontend= Filter By Blog Category= List all Blogs= Get Blogs written by same Author= Comment system (load many comments)= Signup & Loginup By Google= Update User Profile= View Your Profile= CRUD your Blog [ Author is User]= Search Blog= 

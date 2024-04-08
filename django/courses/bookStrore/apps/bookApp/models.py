@@ -41,7 +41,7 @@ class ReviewsModel(models.Model):
     book = models.ForeignKey(BookModel, on_delete=models.CASCADE, related_name='reviews')
     reviewer=models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     reviewContent = models.TextField(verbose_name='Review Text')
-    rating = models.IntegerField(verbose_name='Rating')
+    rating = models.IntegerField(verbose_name='Rating',null=True,default=1)
     createdAt = models.DateTimeField(auto_now_add=True, verbose_name='Review Created At')
 
 

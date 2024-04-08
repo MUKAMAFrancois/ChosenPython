@@ -57,3 +57,9 @@ def login_view(request):
     else:
         form=LoginForm()
     return render(request,'Users/auth/login.html',{'form':form})
+
+
+def logout_view(request):
+    logout(request)
+    messages.success(request,'Logout successful')
+    return redirect('login')
