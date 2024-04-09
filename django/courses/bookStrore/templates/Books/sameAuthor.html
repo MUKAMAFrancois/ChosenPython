@@ -1,0 +1,12 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<h1>Other Books by {{ author.first_name }} {{ author.last_name }}</h1>
+<ul>
+    {% for book in books %}
+    <li><a class="span" href="{% url 'bookDetail' book.id %}">{{ book.title }}</a></li>
+    {% empty %}
+    <li>No other books found for this author.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

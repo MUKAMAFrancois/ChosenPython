@@ -17,7 +17,14 @@
         <p class="read-text">
             {{book.longDescription}}
         </p>
-        <p class="sameAuthor">Read Similar Books of <a href="">The Same Author</a> </p>
+        <p class="sameAuthor">
+           <h3> Read Similar Books of The Same Author(s):</h3>
+            <ul>
+                {% for author in book.authors.all %}
+                <li><a class="span" href="{% url 'books_by_same_author' author.id %}">{{ author.first_name }} {{ author.last_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </p>
         <p>
             Rating:
             {% if average_rating %}
@@ -49,6 +56,7 @@
         {% endif %}
 
         <div class="reviews">
+            {%if reviews %}
             <h4>Recent Reviews</h4>
             {% for review in reviews %}
                 <div class="single-review">
@@ -56,6 +64,7 @@
                     <p class="reviewer">By: {{review.reviewer.username}} at {{review.createdAt}}</p>
                 </div>
             {%endfor%}
+            {%endif%}
         </div>
 
        

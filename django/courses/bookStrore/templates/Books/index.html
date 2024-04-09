@@ -33,7 +33,7 @@
                 Django provides a special variable called forloop.last 
                 that is True for the last iteration and False for all other iterations.
              -->
-            <p>{{ book.pageCount }} Pages. &spades; <span>Rating: {{ book.averageRating}}/5.0</span></p>
+            <p>{{ book.pageCount }} Pages. &spades; Rating: <span class="span">{%if book.averageRating %}{{ book.averageRating}}/5.0 {%else%} No Rating {%endif%}</span></p>
         </a>
         {% endfor %}
     </div>

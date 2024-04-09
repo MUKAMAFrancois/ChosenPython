@@ -66,4 +66,13 @@ def bookDetail(request, book_id):
     return render(request, 'Books/details_book.html', context=dictionary)
 
 
+def books_by_same_author(request, author_id):
+    author = AuthorModel.objects.get(pk=author_id)
+    books = BookModel.objects.filter(authors=author)
+    dictionary = {
+        'books': books,
+        'author': author
+    }
+    return render(request, 'Books/sameAuthor.html', context=dictionary)
+
 
