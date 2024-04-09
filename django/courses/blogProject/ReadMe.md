@@ -9,10 +9,12 @@
 
 - Register
 - Login
+- Login & Signup using Google or Facebook
 - Update your Profile
 - Delete Your Profile
 - View User Profile
 - Leave a comment (Authenticated User)
+- Password Reset
 
 
 
@@ -23,3 +25,11 @@
 - Update the Blog (Author)
 - Delete Blog (only the Author)
 - Filter The Blogs By Category
+- Search a Blog
+
+
+### Subscrribe to NewsLatters
+- getting email notifications from the subscribed list of Authors
+
+
+
