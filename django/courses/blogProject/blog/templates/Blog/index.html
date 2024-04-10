@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Home Page {% endblock %}</title>
+    <title>{% block title%} HomePage{%endblock%}</title>
     <link rel="stylesheet" href="{% static 'css/Blog/home.css' %}">
 </head>
 <body>
@@ -35,7 +35,7 @@
 
                 {% for blog in blogs %}
 
-                 <a href="" class="single-blog">
+                 <a href="{% url 'detailed_page' blog.id %}" class="single-blog">
                      <img class="image-blog" src="{{ blog.image.url}}" alt="">
                      <div class="blog-short-details">
                          <div class="category-time">

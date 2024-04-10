@@ -14,6 +14,8 @@ body{
     line-height: 1.6;
    
 }
+
+/* NAv */
 header{
     background-color: #333;
     color: #fff;
@@ -80,6 +82,10 @@ nav ul li a:hover{
     background-color: #085d9f;
 
 }
+
+
+
+/* Main */
 
 main{
     color:#fff;

@@ -39,7 +39,7 @@ main{
 }
 
 .left-categories {
-    flex-basis: 30%;
+    flex-basis: 20%;
 }
 .left-categories .categories-list {
     margin-top: 1rem;
@@ -71,7 +71,7 @@ main{
   .right-section-blogs-list .blogs-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .right-section-blogs-list .single-blog {
@@ -114,7 +114,11 @@ main{
     margin-right: 0.5rem;
   }
   
- .single-blog .author-details .author-short-details p.author-name {
+  .author-short-details p{
+    line-height: 14px;
+
+  }
+ .author-short-details p.author-name {
     font-weight: bold;
   }
   
