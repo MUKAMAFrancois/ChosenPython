@@ -29,7 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.accounts',
     'apps.blogApp',
+     'ckeditor',
+    'ckeditor_uploader',
 ]
+
+# ckeditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = 'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

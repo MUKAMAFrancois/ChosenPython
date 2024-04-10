@@ -1,5 +1,6 @@
 from django.db import models
 from apps.accounts.models import Person
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -73,10 +74,10 @@ class BlogModel(models.Model):
     title=models.CharField(max_length=100, verbose_name="Title")
     author=models.ForeignKey(Person, on_delete=models.CASCADE,related_name='author_blogs')
     category=models.ManyToManyField(BlogCategory, related_name='blog_categories')
-    content=models.TextField(verbose_name="Content")
+    content=RichTextField(verbose_name="Content")
     image=models.ImageField(upload_to='blog_pics',default='default_blog.jpg', verbose_name= "Blog Image" )
-    date_posted=models.DateTimeField(auto_now_add=True, verbose_name="Date Posted")
-    last_updated=models.DateTimeField(auto_now=True, verbose_name="Last Updated")
+    date_posted=models.DateField(auto_now_add=True, verbose_name="Date Posted",null=True, blank=True)
+    last_updated=models.DateField(auto_now=True, verbose_name="Last Updated",null=True, blank=True)
     views=models.PositiveBigIntegerField(default=0, verbose_name="Views")
    
 
