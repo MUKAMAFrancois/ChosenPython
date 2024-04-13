@@ -66,6 +66,10 @@
   .right-sec {
     flex: 1;
   }
+  .right-sec a{
+    text-decoration: none;
+
+  }
   
   /* Blog Image */
   .image-of-blog {
@@ -83,6 +87,32 @@
   /* Actions */
   .actions {
     margin:40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .like-btn{
+    color: #08c5cc;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    padding:6px 10px;
+    border-radius: 10px;
+ 
+  }
+
+  .dislike-btn{
+    color: #ff0000;
+    font-size: 1.2rem;
+    margin-right: 10px;
+    padding:6px 10px;
+    border-radius: 10px;
+  }
+  .liking-disliking{
+    display: flex;
+    align-items: center;
+  }
+  .likes_count{
+    margin-right: 20px;
   }
   .actions a{
     margin: 0 30px;
@@ -157,7 +187,7 @@
   
   .single-comment {
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 3px solid #ccc;
     padding: 10px;
     border-radius: 4px;
   }

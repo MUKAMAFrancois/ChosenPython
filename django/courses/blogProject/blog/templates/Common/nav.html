@@ -72,8 +72,9 @@ nav ul li a:hover{
     <div class="logo">
         <h5>Welcome, {{user.first_name}} {{user.last_name}}</h5>
     </div>
-    <form action="" method="post" class="search-container">
-        <input type="text" name="search" id="search" placeholder="Search Blog">
+    <form action="{% url 'search_blog' %}" method="get" class="search-container">
+        {% csrf_token %}
+        <input type="text" name="q" id="search" placeholder="Search Blog">
         <button type="submit">Search</button>
     </form>
     <nav>

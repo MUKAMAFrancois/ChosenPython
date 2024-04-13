@@ -58,7 +58,7 @@ admin.site.register(CommentModel,CommentAdmin)
 
 class ReactionAdmin(admin.ModelAdmin):
     list_display = ('getPersonUsername','getBlogReacted','reaction','date_reacted')
-    list_filter = ('blog',)
+    list_filter = ('reaction',)
     search_fields = ('blog',)
 
 

@@ -1,6 +1,7 @@
 from django.db import models
 from apps.accounts.models import Person
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 # Create your models here.
 
@@ -37,7 +38,7 @@ class BlogCategory(models.Model):
     
 
 class CommentModel(models.Model):
-    person=models.ForeignKey(Person, on_delete=models.CASCADE, related_name='comment_person')
+    person=models.ForeignKey(Person, on_delete=models.CASCADE, related_name='comment_person',default=None)
     blog=models.ForeignKey('BlogModel', on_delete=models.CASCADE, related_name='comments_blog')
     comment=models.TextField(verbose_name="Comment")
     date_commented=models.DateTimeField(auto_now_add=True, verbose_name="Date Commented")
@@ -55,7 +56,7 @@ class ReactionModel(models.Model):
         (1, 'Like'),
     )
 
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='reactions')
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='reactions',null=True)
     blog = models.ForeignKey('BlogModel', on_delete=models.CASCADE, related_name='reactions')
     reaction = models.IntegerField(choices=REACTION_CHOICES, default=0)
     date_reacted = models.DateTimeField(auto_now=True, verbose_name="Date Reacted")
@@ -83,6 +84,9 @@ class BlogModel(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('detailed_page', kwargs={'blog_id': self.id})
 
     class Meta:
         verbose_name_plural="Blog Models"

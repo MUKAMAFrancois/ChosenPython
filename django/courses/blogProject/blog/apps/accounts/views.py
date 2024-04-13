@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
-from .forms import ProfileCreationForm,RegistrationForm,LoginForm
+from .forms import ProfileCreationForm,RegistrationForm,LoginForm,ProfileUpdateForm
 from django.contrib import messages
 from apps.accounts.models import Person
 from django.contrib.auth.decorators import login_required
@@ -125,3 +125,47 @@ def view_profile(request):
         'my_blogs':my_blogs
     }
     return render(request,'Users/view_profile.html',context=context)
+
+
+@login_required
+def update_profile(request):
+    user=request.user
+    try:
+        person=user.person
+    except Person.DoesNotExist:
+        person=None
+    if request.method == 'POST':
+        form=ProfileUpdateForm(request.POST,request.FILES,instance=person)
+        if form.is_valid():
+            user_bio=form.cleaned_data['user_bio']
+            phone_number=form.cleaned_data['phone_number']
+            wanna_be_a_blogger=form.cleaned_data['wanna_be_a_blogger']
+            user_company=form.cleaned_data['user_company']
+            user_profile=form.cleaned_data['user_profile']
+            try:
+                person = user.person
+                person.user_bio=user_bio
+                person.phone_number=phone_number
+                person.wanna_be_a_blogger=wanna_be_a_blogger
+                person.user_company=user_company
+                person.user_profile=user_profile
+
+                person.save()
+            except Person.DoesNotExist:
+                person =Person.objects.create(user=user,
+                                                user_bio=user_bio,
+                                                phone_number=phone_number,
+                                                wanna_be_a_blogger=wanna_be_a_blogger,
+                                                user_company=user_company,
+                                                user_profile=user_profile)
+                person.save()
+            messages.success(request,'Profile updated successfully')
+            return redirect('view_profile')
+    else:
+        form=ProfileUpdateForm(instance=person)
+
+    context={
+        'form':form,
+        'person':person
+    }
+    return render(request,'Users/update_profile.html',context)

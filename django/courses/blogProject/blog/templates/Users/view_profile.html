@@ -23,15 +23,14 @@
                 <p><b>About:</b></p>
                 <p>{{person.user_bio}}</p>
                 <p><b>Company: </b>{{person.user_company}}</p>
-                <p><b>Are you a Blogger?:</b>{%if person.wanna_be_a_blogger %} Yes {%else%} No {%endif%}</p>
+                <p><b>Are you a Blogger?:</b>{%if person.wanna_be_a_blogger %} Yes {%else%} Not {%endif%}</p>
             </div>
         </div>
         <div class="update-profile">
             {%if not person.wanna_be_a_blogger %}
                 <h2><a href="">Become</a> a Blogger Now to start writting Blogs!</h2>
-            {%endif%}
-            {%if person.wanna_be_a_blogger %}
-            <a class="update-profile-link" href="">Update your Profile</a>
+            {%else%}
+            <a class="update-profile-link" href="{% url 'update_profile' %}">Update your Profile</a>
             <a class="add-blog"  href="{% url 'create_blog' %}">Add new blog</a>
             {%endif%}
         </div>
@@ -63,8 +62,8 @@
                             </ul>
                         </td>
                         <td>
-                            <a href="">Edit</a>
-                            <a href="">Delete</a>
+                            <a href="{% url 'update_blog' blog.id %}">Edit</a>
+                            <a href="{% url 'delete_blog' blog.id %}">Delete</a>
                         </td>
                     </tr>  
                 <tbody>
