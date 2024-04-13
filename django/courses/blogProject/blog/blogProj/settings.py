@@ -29,9 +29,36 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.accounts',
     'apps.blogApp',
+
+    # ckeditor
      'ckeditor',
     'ckeditor_uploader',
+
+    # allauth
+    'allauth',
+    'allauth.account',
+    'django.contrib.sites',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+SITE_ID=1
+
+# from django.contrib.sites.models import Site
+# Site.objects.create(domain='localhost', name='localhost')
+
+
+SOCIALACCOUNT_PROVIDERS={
+    'google':{
+        'SCOPE':['profile','email'],
+        'AUTH_PARAMS':{'access_type':'online'},
+    }
+
+}
 
 # ckeditor settings
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -46,6 +73,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # allauth
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'blogProj.urls'
@@ -61,6 +91,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # allauth
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -110,6 +143,19 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL='login'
+
+
+# just used mailtrap.io for testing
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '2cb90ceba0e3e2'
+EMAIL_HOST_PASSWORD = 'd97f89d9ba16fb'
+EMAIL_PORT = '2525'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/

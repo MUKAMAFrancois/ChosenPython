@@ -45,6 +45,15 @@ main{
     margin-top: 1rem;
   }
   
+  .filter_button{
+    background-color: #0cf3e3;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
   .left-categories .single-category {
     display: flex;
     align-items: center;

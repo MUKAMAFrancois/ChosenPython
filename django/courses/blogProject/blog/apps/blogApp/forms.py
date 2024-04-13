@@ -1,6 +1,7 @@
 from django import forms
 from .models import BlogCategory
 
+
 class BlogPostForm(forms.Form):
     title=forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class':'form-control'}))
     category=forms.ModelMultipleChoiceField(queryset=BlogCategory.objects.all(),
@@ -35,3 +36,4 @@ class CommentForm(forms.Form):
 
 class ReactionForm(forms.Form):
     reaction = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+

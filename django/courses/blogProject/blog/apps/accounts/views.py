@@ -5,7 +5,7 @@ from .forms import ProfileCreationForm,RegistrationForm,LoginForm,ProfileUpdateF
 from django.contrib import messages
 from apps.accounts.models import Person
 from django.contrib.auth.decorators import login_required
-from apps.blogApp.models import BlogModel
+from apps.blogApp.models import BlogModel,ReactionModel
 
 # Create your views here.
 
@@ -120,9 +120,13 @@ def view_profile(request):
     user=request.user
     person=user.person
     my_blogs = BlogModel.objects.filter(author=person)
+    for blog in my_blogs:
+        likes = ReactionModel.objects.filter(blog=blog,reaction=1).count()
     context={
         'person':person,
-        'my_blogs':my_blogs
+        'my_blogs':my_blogs,
+        'likes':likes,
+      
     }
     return render(request,'Users/view_profile.html',context=context)
 

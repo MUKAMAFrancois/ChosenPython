@@ -17,16 +17,22 @@
          <div class="left-categories">
              <h2>Filter Blogs By Categories</h2>
              <div class="categories-list">
-
-                {% for category in categories %}
-                 <div class="single-category">
-                     <input type="checkbox" name="category" id="">
-                     <label for="">{{category.category_name}}</label>
-                     
-                 </div>
-
-                {% endfor %}
-
+                <form action="{% url 'home' %}" method="get">
+                    {% for category in categories %}    
+                    <div class="single-category">
+                        <input 
+                            type="checkbox" 
+                            name="category" 
+                            value="{{category.category_name}}"
+                            id="{{category.id}}"
+                            {% if request.GET.category == category.category_name %} checked {%endif%}
+                            >
+                        <label for="{{category.id}}">{{category.category_name}}</label>
+                        
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="filter_button">Filter</button>
+                </form>
              </div>
          </div>
      

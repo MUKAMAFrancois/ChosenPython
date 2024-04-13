@@ -2,6 +2,7 @@ from django.db import models
 from apps.accounts.models import Person
 from ckeditor.fields import RichTextField
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -56,17 +57,17 @@ class ReactionModel(models.Model):
         (1, 'Like'),
     )
 
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='reactions',null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reactions')
     blog = models.ForeignKey('BlogModel', on_delete=models.CASCADE, related_name='reactions')
     reaction = models.IntegerField(choices=REACTION_CHOICES, default=0)
     date_reacted = models.DateTimeField(auto_now=True, verbose_name="Date Reacted")
 
 
     def __str__(self):
-        return f'{self.person.user.username} Reacted on {self.blog.title}'
+        return f'{self.user.username} Reacted on {self.blog.title}'
     
     class Meta:
-        unique_together = ('person', 'blog') # A person can react to a blog only once
+        unique_together = ('user', 'blog') # A person can react to a blog only once
         verbose_name = "Reaction Model"
 
 

@@ -13,6 +13,11 @@ from django.contrib import messages
 def index(request):
     blogs=BlogModel.objects.all().order_by('-date_posted')
     categories=BlogCategory.objects.all()
+    # filter blogs by category
+    category_filter=request.GET.get('category')
+    if category_filter:
+        blogs=blogs.filter(category__category_name=category_filter)
+    
     context={
         'blogs':blogs,
         'categories':categories,
@@ -50,13 +55,13 @@ def detailed_page(request,blog_id):
         reaction_form=ReactionForm(request.POST)
         if reaction_form.is_valid():
             reaction=reaction_form.cleaned_data['reaction']
-            existing_reaction= ReactionModel.objects.filter(person=request.user.person,blog=blog).first()
+            existing_reaction= ReactionModel.objects.filter(user=request.user,blog=blog).first()
             if existing_reaction:
                 existing_reaction.reaction=reaction
                 existing_reaction.save()
                 return redirect('detailed_page',blog_id=blog_id)
             else:
-                reaction_instance=ReactionModel(person=request.user.person,
+                reaction_instance=ReactionModel(user=request.user,
                                                 blog=blog,
                                                 reaction=reaction)
                 reaction_instance.save()

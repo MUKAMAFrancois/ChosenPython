@@ -82,12 +82,6 @@
                 <div class="recent-comments">
                     <h4>Recent Comments</h4>
 
-                    {% if messages%}
-                        {% for message in messages %}
-                            <p style="color:red">{{message}}</p>
-                        {%endfor%}
-                    {%endif%}
-
                     {% if comments %}
                         {% for comment in comments %}
                             <div class="single-comment">
