@@ -58,6 +58,24 @@ print(countries)
 # ['Spain', 'Canada', 'Australia', 'Philipines', 'Bangladesh', 'Vatican City', 'United States']
 
 
+
+# sorting by multiple things
+
+# Sample dictionary
+employees = [
+    {'name': 'Alice', 'age': 30, 'salary': 50000},
+    {'name': 'Bob', 'age': 35, 'salary': 60000},
+    {'name': 'Charlie', 'age': 25, 'salary': 45000}
+]
+
+# Sort the dictionary by 'salary' and then by 'age'
+sorted_employees = sorted(employees, key=lambda x: (x['salary'], x['age']), reverse=True)
+
+# Print the sorted dictionary
+for employee in sorted_employees:
+    print(employee)
+
+
 # sorted!!!!!!!!!!!!! sorted(iterable, key=None, reverse=False)
 
 
