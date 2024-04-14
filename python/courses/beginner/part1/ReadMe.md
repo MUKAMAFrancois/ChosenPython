@@ -61,3 +61,44 @@
 
 11. **Libraries and Frameworks:**
     - Introduction to web frameworks (Django)
+
+
+
+
+
+12. **Advanced Functions:**
+    - Anonymous functions (lambda functions)
+    - Higher-order functions
+    - Function arguments (default arguments, variable-length arguments)
+    - Recursion
+
+13. **Concurrency and Parallelism:**
+    - Threading
+    - Multiprocessing
+    - Asynchronous programming (asyncio)
+
+14. **Database Interaction:**
+    - Connecting to databases (SQLite, MySQL, PostgreSQL, etc.)
+    - Querying databases (SQLAlchemy, Django ORM)
+    - Object-Relational Mapping (ORM)
+
+15. **Testing:**
+    - Writing and running tests (unittest, pytest)
+    - Test-driven development (TDD)
+    - Mocking and patching
+
+
+17. **Web Scraping:**
+    - Requests for making HTTP requests
+    - BeautifulSoup or Scrapy for parsing HTML and XML
+    - Selenium for browser automation
+
+18. **Networking:**
+    - Socket programming
+    - HTTP requests and responses
+    - RESTful APIs
+
+19. **Security:**
+    - Basic cybersecurity principles
+    - Secure coding practices
+    - Encryption and hashing

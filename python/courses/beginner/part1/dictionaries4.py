@@ -362,6 +362,13 @@ else:
     print("Your lists are not of equal length")
 
 
+# OR
+
+contrY_city= {
+   country:city for country,city in zip(countries,cities)
+}
+
+print(contrY_city)
 
 # 10. Working with Default Values
 

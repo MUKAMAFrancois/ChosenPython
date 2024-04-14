@@ -37,6 +37,28 @@ def combiner(dict1, dict2):
     return result
 print(combiner(d1,d2))
 
+
+# OR
+
+d1 = {'a': 100, 'b': 200, 'c':300}
+d2 = {'a': 300, 'b': 200, 'd':400}
+
+
+# output
+
+def combiner(d1,d2):
+    d={}
+    for name in d1.keys():
+        if name in d2.keys():
+            d[name] = d1[name] + d2[name]
+        elif name not in d2.keys():
+            d[name] = d1[name]
+        else:
+            d[name] = d2[name]
+    print(d)
+
+combiner(d1=d1,d2=d2)
+
 #3. (w3....21)
 # Write a Python program to create and display all combinations of letters, 
 #selecting each letter from a different key in a dictionary.
