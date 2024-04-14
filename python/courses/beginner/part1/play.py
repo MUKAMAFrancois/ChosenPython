@@ -1,6 +1,4 @@
-class Circle:
-    pi=22/7
-
-
-    def __init__(self,radius):
-        self.radius=radius
+from functools import reduce
+chars = ['Hello','Message','from','python']
+message=reduce(lambda str1,str2: str1 + " " + str2,chars)
+print(message)
