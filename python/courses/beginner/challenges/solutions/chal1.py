@@ -253,6 +253,9 @@ def flattening(listObj):
 flattening(originalList)
 
 
+
+
+
 # Sol8.
 
 
@@ -272,9 +275,10 @@ print("After removing consecutive duplicates:")
 print(result)
 
 
+
+
+
 # Sol9.
-
-
 
 def subListsMaker(listObj):
     container=[]
@@ -292,3 +296,55 @@ def subListsMaker(listObj):
 original =[0, 0, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 8, 9, 4, 4]
 
 print(subListsMaker(original))
+
+
+
+
+# Sol10.
+
+
+def list_partitioner(listObj,upto):
+    fisrt_part=[]
+    second_part=[]
+    
+    for index in range(upto):
+        fisrt_part.append(listObj[index])
+    
+    for index in range(upto,len(listObj)):
+        second_part.append(listObj[index])
+        
+    return [fisrt_part,second_part]
+    
+Original=[1, 1, 2, 3, 4, 4, 5, 1]
+
+print(list_partitioner(Original,3))
+
+
+# Sol11.
+
+
+# Write a program to remove an element at k'th position and return updated list.
+
+def nth_element_remover(listObj,at):
+    listObj.remove(listObj[at])
+    print(listObj)
+    
+    
+original= [1, 1, 2, 3, 4, 4, 5, 1]
+nth_element_remover(original,2)
+
+    
+
+
+# Sol12.
+
+#  Write a program to insert an element at k'th position and return updated list.
+
+def insert_element_toList(listObj,element,at):
+    listObj.insert(at,element)
+    
+    print(listObj)
+    
+original=[10,20,30,40]
+insert_element_toList(original,12,1)
+    

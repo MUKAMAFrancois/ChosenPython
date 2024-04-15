@@ -121,3 +121,8 @@ Original list:
 Length of the first part of the list: 3
 Splited the said list into two parts:
 ([1, 1, 2], [3, 4, 4, 5, 1]) => Qn79
+
+
+11. Write a program to remove an element at k'th position and return updated list.
+
+12. Write a program to insert an element at k'th position and return updated list.
