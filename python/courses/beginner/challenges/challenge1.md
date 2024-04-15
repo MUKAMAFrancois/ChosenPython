@@ -77,3 +77,47 @@ Expected Output: [10, 11, 12]
 4.  Write a Python program to remove duplicates from a list of lists.
 Sample list : [[10, 20], [40], [30, 56, 25], [10, 20], [33], [40]]
 New List : [[10, 20], [30, 56, 25], [33], [40]] => Qn 69.
+
+
+5. Write a Python program to find items starting with a specific character from a list.
+Expected Output:
+Original list:
+['abcd', 'abc', 'bcd', 'bkie', 'cder', 'cdsw', 'sdfsd', 'dagfa', 'acjd']
+Items start with a from the said list:
+['abcd', 'abc', 'acjd']
+Items start with d from the said list:
+['dagfa']
+Items start with w from the said list:
+[]
+
+
+6. Write a Python program to check whether all dictionaries in a list are empty or not.
+Sample list : [{},{},{}]
+Return value : True
+Sample list : [{1,2},{},{}]
+Return value : False
+
+7. Write a Python program to flatten a given nested list structure.
+Original list: [0, 10, [20, 30], 40, 50, [60, 70, 80], [90, 100, 110, 120]]
+Flatten list:
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120]
+
+
+8. Write a Python program to remove consecutive (following each other continuously) duplicates (elements) from a given list.
+Original list:
+[0, 0, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 8, 9, 4, 4]
+After removing consecutive duplicates:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 4]
+
+9. . Write a  Python program to pack consecutive duplicates of a given list of elements into sublists.
+Original list:
+[0, 0, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7, 8, 9, 4, 4]
+After packing consecutive duplicates of the said list elements into sublists:
+[[0, 0], [1], [2], [3], [4, 4], [5], [6, 6, 6], [7], [8], [9], [4, 4]]
+
+10. . Write a  Python program to split a given list into two parts where the length of the first part of the list is given.
+Original list:
+[1, 1, 2, 3, 4, 4, 5, 1]
+Length of the first part of the list: 3
+Splited the said list into two parts:
+([1, 1, 2], [3, 4, 4, 5, 1]) => Qn79
