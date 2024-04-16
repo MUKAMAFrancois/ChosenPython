@@ -63,3 +63,43 @@ class Solution:
 # Example usage
 solution = Solution()
 print(solution.integerToRoman(456))  # Output: CDLVI
+
+
+
+# Sol3.
+def find_index(haystack,needle):
+    return haystack.find(needle)
+
+
+print(find_index("sadbutsad","sad"))
+
+
+
+# Sol 4. ?????
+
+
+def value_replacement(array,value):
+    str_arr =[]
+    for element in array:
+        str_arr.append(str(element))
+
+    str_text=",".join(str_arr)
+    replaced_text=str_text.replace(str(value),"_")
+    replaced_arr_str=sorted(replaced_text.split(","))
+    
+    solution=[]
+    for j in replaced_arr_str:
+        if j !='_':
+            solution.append(int(j))
+        else:
+            solution.append('_')
+
+    print(solution)
+
+
+nums = [0,1,2,2,3,0,4,2]
+val = 2
+value_replacement(array=nums,value=val)  #[0, 0, 1, 3, 4, '_', '_', '_']
+
+
+
