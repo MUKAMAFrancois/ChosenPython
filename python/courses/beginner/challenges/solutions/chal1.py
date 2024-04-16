@@ -347,4 +347,56 @@ def insert_element_toList(listObj,element,at):
     
 original=[10,20,30,40]
 insert_element_toList(original,12,1)
+
+
+#Sol13. Write a program to count how many each item appeared in a list.
+
+
+def count_occurences(listObj):
+    occurences={}
+    
+    for item in listObj:
+        if item in occurences.keys():
+            occurences[item] +=1
+        
+        else:
+            occurences[item] =1
+    
+    print(occurences)
+    
+original= ['1','1','2','2','2']
+count_occurences(original) # {'1': 2, '2': 3}
+
+
+
+#14.   Write a Python program to extract a given number of randomly selected elements from a given list.
+# Original list:
+# [1, 1, 2, 3, 4, 4, 5, 1]
+# Selected 3 random numbers of the above list:
+# [4, 4, 1]
+
+
+
+import random
+def select_random_numbers(listObj):
+    
+    howMany=int(input('How many Numbers do you want?: '))
+    indexes=[]
+    selectedNums=[]
+
+    randomNumber=0
+    while len(indexes) !=howMany:
+        randomNumber= random.randint(0,len(listObj)-1)
+        indexes.append(randomNumber)
+
+    for index in indexes:
+        selectedNums.append(listObj[index])
+
+    print(selectedNums)
+
+listObj=[2,45,8,99,12,80,0,23,44,123]
+select_random_numbers(listObj)
+
+
+    
     

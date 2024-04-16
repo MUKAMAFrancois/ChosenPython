@@ -126,3 +126,21 @@ Splited the said list into two parts:
 11. Write a program to remove an element at k'th position and return updated list.
 
 12. Write a program to insert an element at k'th position and return updated list.
+
+13. Write a program to count how many each item appeared in a list.
+
+original= ['1','1','2','2','2']
+
+sln:
+
+{
+    '1': 2,
+    '2':3
+}
+
+
+14. Write a Python program to extract a given number of randomly selected elements from a given list.
+Original list:
+[1, 1, 2, 3, 4, 4, 5, 1]
+Selected 3 random numbers of the above list:
+[4, 4, 1]
