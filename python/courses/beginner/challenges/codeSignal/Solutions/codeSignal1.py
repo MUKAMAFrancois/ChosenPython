@@ -55,12 +55,14 @@ print(solution([1, 3, 2]))  # Output: True
 # 
 
 # Problem Explanation:
-# Given an array of integers, we need to check each consecutive triple of elements in the array. A triple (a, b, c) is considered a zigzag if either a < b > c or a > b < c. Our task is to construct a new array where the ith element of the output array is 1 if the corresponding triple in the original array is a zigzag, and 0 otherwise.
+# Given an array of integers, we need to check each consecutive triple of elements in the array. 
+# A triple (a, b, c) is considered a zigzag if either a < b > c or a > b < c.
+#  Our task is to construct a new array where the ith element of the output array is 1 if the corresponding triple in the original array is a zigzag, and 0 otherwise.
 
 # Solution Approach:
-# To solve this problem, we can iterate over the array and compare each triple of consecutive elements. If the triple satisfies the zigzag condition, we append 1 to the result array; otherwise, we append 0.
+# To solve this problem, we can iterate over the array and compare each triple of consecutive elements. 
+# If the triple satisfies the zigzag condition, we append 1 to the result array; otherwise, we append 0.
 
-# Here's the beginner-level Python solution:
 
 
 def solution(numbers):
@@ -104,44 +106,6 @@ print(matrix_elements_sum(matrix2))  # Output: 9
 
 
 
-# 
-
-# ```python
-# def matrix_elements_sum(matrix):
-# ```
-# This line defines a function named `matrix_elements_sum` that takes a matrix (a list of lists) as input.
-
-# ```python
-#     total_sum = 0
-# ```
-# This line initializes a variable `total_sum` to 0. This variable will be used to store the sum of the costs of suitable rooms (rooms that are not haunted or below a haunted room).
-
-# ```python
-#     haunted_columns = set()
-# ```
-# This line creates an empty set named `haunted_columns`. This set will be used to keep track of the column indices that have a haunted room (a room with cost 0).
-
-# ```python
-#     for row in matrix:
-#         for col, value in enumerate(row):
-#             if value == 0:
-#                 haunted_columns.add(col)
-# ```
-# These lines iterate over each row in the matrix using a nested loop. For each element in the row, the `enumerate` function is used to get the column index (`col`) and the value (`value`) of the element. If the value is 0 (a haunted room), the column index `col` is added to the `haunted_columns` set.
-
-# ```python
-#             elif col not in haunted_columns:
-#                 total_sum += value
-# ```
-# This line checks if the current column index `col` is not in the `haunted_columns` set (meaning it's not a haunted column or below a haunted room). If this condition is true, the value of the current element is added to `total_sum`.
-
-# ```python
-#     return total_sum
-# ```
-# After iterating through all rows and columns, the function returns the `total_sum`, which represents the sum of the costs of suitable rooms.
-
-# The algorithm used here is a straightforward implementation that iterates through the matrix and keeps track of haunted columns. It follows these steps:
-
 # 1. Initialize `total_sum` to 0 and `haunted_columns` to an empty set.
 # 2. Iterate through each row in the matrix.
 # 3. For each element in the row:
@@ -149,62 +113,39 @@ print(matrix_elements_sum(matrix2))  # Output: 9
 #    b. If the element's value is not 0 and its column index is not in the `haunted_columns` set (not a haunted column or below a haunted room), add the element's value to `total_sum`.
 # 4. After iterating through all rows and columns, return `total_sum`.
 
-# The time complexity of this algorithm is O(m * n), where m is the number of rows and n is the number of columns in the matrix. This is because we need to iterate through all elements in the matrix once.
 
-# The space complexity is O(n), where n is the number of columns, as we need to store the column indices of haunted columns in the `haunted_columns` set. In the worst case, all columns could be haunted, so the set would need to store n elements.
+inputArray = ["aba", "aa", "ad", "vcd", "aba"]
 
+def sorting(arr):
+    longer=[]
+    arr.sort(key=lambda y: len(y))
+    for item_arr in arr:
+        if len(item_arr) == len(arr[-1]):
+            longer.append(item_arr)
+    print(longer)
 
+sorting(inputArray)
 
-
-# Sol6.
-
-def solution(inputArray):
-    # Step 1: Find the maximum length of strings in the input array
-    max_length = max(len(s) for s in inputArray)
-
-    # Step 2: Create a new list to store the longest strings
-    longest_strings = []
-
-    # Step 3: Iterate through each string in the input array
-    for string in inputArray:
-        # Step 4: Check if the length of the current string is equal to the maximum length
-        if len(string) == max_length:
-            # Step 5: If it is, add the string to the longest_strings list
-            longest_strings.append(string)
-
-    # Step 6: Return the list of longest strings
-    return longest_strings
 
 
 
 # Sol 7.
 
 
-def solution(s1, s2):
-    # Step 1: Create a frequency dictionary for each string
-    freq1 = {}
-    freq2 = {}
+str1="backward"
+str2="wakeup"
+#3: wak
+def intersection_chars(str1,str2):
+    set1=set()
+    set2=set()
+    for char in str1:
+        set1.add(char)
+    for ch in str2:
+        set2.add(ch)
+    print(len(set1&set2))
 
-    # Step 2: Count the frequency of each character in s1
-    for char in s1:
-        freq1[char] = freq1.get(char, 0) + 1
-
-    # Step 3: Count the frequency of each character in s2
-    for char in s2:
-        freq2[char] = freq2.get(char, 0) + 1
-
-    # Step 4: Initialize a variable to store the number of common characters
-    common_chars = 0
-
-    # Step 5: Iterate through the characters in freq1
-    for char in freq1:
-        # Step 6: If the character is also present in freq2
-        if char in freq2:
-            # Step 7: Add the minimum frequency of the character in both strings to common_chars
-            common_chars += min(freq1[char], freq2[char])
-
-    # Step 8: Return the number of common characters
-    return common_chars
+intersection_chars(str1,str2)
+ 
 
 
 
@@ -235,6 +176,35 @@ def solution(n):
     # Check if the sums are equal
     return first_half_sum == second_half_sum
 
+
+def lucky_number(number):
+    arr=[]
+    arr1=[]
+    arr2=[]
+    arr1_int=[]
+    arr2_int=[]
+    for str_num in str(number):
+        arr.append(str_num)
+    if len(arr) %2 ==0:
+        for first_index in range(len(arr)//2):
+            arr1.append(arr[first_index])
+        for second_index in range(len(arr)//2,len(arr)):
+            arr2.append(arr[second_index])
+ 
+        for num in arr1:
+            arr1_int.append(int(num))
+        for j in arr2:
+            arr2_int.append(int(j))
+        if sum(arr1_int) == sum(arr2_int):
+            print("Lucky")
+        else:
+            print("Un Lucky")
+    else:
+        print("No equal parts")
+        
+    
+
+lucky_number(1230)
 
 # Sol9.
 def solution(a):
