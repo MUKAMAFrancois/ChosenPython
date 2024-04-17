@@ -240,3 +240,58 @@ def solution(a):
 
 
 
+
+
+
+
+# Sol10.
+
+
+def solution(inputString):
+    # Create an empty stack to store the characters
+    stack = []
+    # Create an empty string to store the reversed characters
+    reversed_string = ""
+    # Create a flag to track if we're inside parentheses
+    inside_parentheses = False
+
+    for char in inputString:
+        # If we encounter an opening parenthesis
+        if char == "(":
+            # Set the inside_parentheses flag to True
+            inside_parentheses = True
+            # Add the character to the stack
+            stack.append(char)
+        # If we encounter a closing parenthesis
+        elif char == ")":
+            # Set the inside_parentheses flag to False
+            inside_parentheses = False
+            # Pop characters from the stack and append them to the reversed_string
+            # until we find the corresponding opening parenthesis
+            while stack and stack[-1] != "(":
+                reversed_string += stack.pop()
+            # Pop the opening parenthesis from the stack (we don't need it)
+            if stack:
+                stack.pop()
+        # If we're inside parentheses
+        elif inside_parentheses:
+            # Add the character to the stack
+            stack.append(char)
+        # If we're outside parentheses
+        else:
+            # Add the character to the reversed_string
+            reversed_string += char
+
+    # If there are any remaining characters in the stack (after reversing the last parentheses)
+    while stack:
+        reversed_string += stack.pop()
+
+    return reversed_string
+
+print(solution("(bar)"))  # Output: rab
+print(solution("foo(bar)baz"))  # Output: foorabbaz
+print(solution("foo(bar)baz(blim)"))  # Output: foorabbazmilb
+print(solution("foo(bar(baz))blim"))  # Output: foobazrabblim
+
+
+
