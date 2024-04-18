@@ -278,7 +278,156 @@ combiner(d1=d1,d2=d2)
 
 
 
-#### LISTS #################33
+#### LISTS #################
+
+
+# Sol1.  ====????
+
+
+matrix =[
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+
+summed={}
+for row in matrix:
+    for col,value in enumerate(row):
+        if col in summed.keys():
+            summed[col]+=value
+        else:
+            summed[col]=value
+
+column_sums=[]
+for value in summed.values():
+    column_sums.append(value)
+
+
+print(summed)
+print(column_sums)
+
+
+# Sol2.
+
+
+matrix =[
+    [20,40,60],
+    [10,-10,-20],
+    [70,90,100]
+]
+
+def sum_of_diagonal(matrix):
+    result=0
+
+    for index in range(len(matrix)):
+        result += matrix[index][index]
+
+    print(result)
+
+sum_of_diagonal(matrix)
+
+
+# Sol3.
+
+
+x=[[1, 3], [5, 7], [9, 11]]
+y= [[2, 4], [6, 8], [10, 12, 14]]
+
+
+def zipping(list1,list2):
+    
+    for index in range(len(list1)):
+        for item in list2[index]:
+            list1[index].append(item)
+      
+
+    print(list1)
+
+
+zipping(x,y)
+
+
+# Sol4.
+
+listObj = [[9, 11], [0], [1, 3], [5, 7], [13, 15, 17]]
+
+listObj.sort(key=lambda x: len(x))
+print(listObj)
+
+maximum =(len(listObj[-1]),listObj[-1])
+minimum = (len(listObj[0]), listObj[0])
+print(maximum,minimum)
+
+# Sol5.
+
+
+lis1=[[[1, 2], [2, 3]], [[3, 4], [5, 6]]]
+lis2=[[[3, 4], [5, 6]]]
+#expected: True because lis2 is subset of lis1
+
+def isSubset(list1,list2):
+    list2_is_subset=0
+    count_sub1=0
+
+    for sub_list in list2:
+        if sub_list in list1:
+            list2_is_subset+=1
+
+    
+    for sub_list in list1:
+        if sub_list in list2:
+            count_sub1 +=1
+
+    if list2_is_subset == len(list2) or count_sub1 == len(list1):
+        return True
+    else:
+        return False
+    
+print(isSubset(lis1,lis2))
+
+
+# Sol6.
+
+
+arr1=[[1, 3], [5, 7], [1, 11], [1, 15, 7]]
+
+def count_occurence_of_element(list1):
+    number=int(input("Occurences of?: "))
+    occurences=0
+
+    for sublist in list1:
+        if number in sublist:
+            occurences+=1
+    
+    print(f"{number} occurs {occurences} times.")
+
+
+count_occurence_of_element(arr1)
+
+
+# Sol7.
+
+
+
+#Sol8.
+
+
+#Sol9.
+
+
+heterogenous =['Python', 3, 2, 4, 5, 'version']
+
+def max_of_mixture(array):
+    nums=[]
+    for element in array:
+        if isinstance(element,int):
+            nums.append(element)
+    maximum=max(nums)
+    minmum=min(nums)
+    
+    print((maximum,minmum))
+
+max_of_mixture(heterogenous)
 
 
 

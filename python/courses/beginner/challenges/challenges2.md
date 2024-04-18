@@ -158,23 +158,13 @@ Original list:
 Number of unique lists of the said list:
 {('green', 'orange'): 2, ('black',): 1, ('white',): 1}
 
-8.  Write a  Python program to count the number of unique sublists within a given list.
-Original list:
-[[1, 3], [5, 7], [1, 3], [13, 15, 17], [5, 7], [9, 11]]
-Number of unique lists of the said list:
-{(1, 3): 2, (5, 7): 2, (13, 15, 17): 1, (9, 11): 1}
-Original list:
-[['green', 'orange'], ['black'], ['green', 'orange'], ['white']]
-Number of unique lists of the said list:
-{('green', 'orange'): 2, ('black',): 1, ('white',): 1}
-
-9. Write a  Python program to sort a given list of lists by length and value.
+8. Write a  Python program to sort a given list of lists by length and value.
 Original list:
 [[2], [0], [1, 3], [0, 7], [9, 11], [13, 15, 17]]
 Sort the list of lists by length and value:
 [[0], [2], [0, 7], [1, 3], [9, 11], [13, 15, 17]]
 
-10.  Write a  Python program to find the maximum and minimum values in a given heterogeneous list.
+9.  Write a  Python program to find the maximum and minimum values in a given heterogeneous list.
 Original list:
 ['Python', 3, 2, 4, 5, 'version']
 Maximum and Minimum values in the said list:
