@@ -408,6 +408,20 @@ count_occurence_of_element(arr1)
 # Sol7.
 
 
+def count_occurence_(array):
+    results={}
+    
+    for sublist in array:
+        if tuple(sublist) in results.keys():
+            results[tuple(sublist)] +=1
+        else:
+            results[tuple(sublist)]=1
+            
+    print(results)
+    
+count_occurence_([['green', 'orange'], ['black'], ['green', 'orange'], ['white']])
+
+
 
 #Sol8.
 
@@ -428,6 +442,50 @@ def max_of_mixture(array):
     print((maximum,minmum))
 
 max_of_mixture(heterogenous)
+
+
+
+
+
+# Sol10.
+
+def sorting_by_sum(array):
+    sorted_arr=sorted(array, key=lambda y: sum(y))
+    print(sorted_arr)
+    
+    
+sorting_by_sum([[1, 2, 3], [-2, 4, -5], [1, -1, 1]])
+
+
+
+# Sol11.
+
+def consecutives(array):
+    result=set()
+    
+    for index in range(len(array)):
+        if array[index] == array[index-1]:
+            result.add(array[index-1])
+            
+    print(list(result))
+    
+
+consecutives( [0, 1, 2, 3, 4, 4, 4, 4, 5, 7])
+
+
+# Sol12.
+
+
+
+def difference_(array):
+    result=[]
+    
+    for index in range(1,len(array)):
+        result.append(array[index]-array[index-1])
+    
+    print(result)
+    
+difference_([4, 5, 8, 9, 6, 10])
 
 
 
