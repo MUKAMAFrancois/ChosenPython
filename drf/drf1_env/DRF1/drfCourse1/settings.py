@@ -29,8 +29,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',#
     'posts',#
+
+
     'rest_framework',#
+    'rest_framework.authtoken',
+    'drf_yasg',
 ]
+#
+REST_FRAMEWORK = {
+    "NON_FIELD_ERRORS_KEY": "errors",
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+
+    # "DEFAULT_PERMISSION_CLASSES": [
+    #     "rest_framework.permissions.IsAuthenticated",
+    # ],
+}
+
+AUTH_USER_MODEL = 'accounts.User'#
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
