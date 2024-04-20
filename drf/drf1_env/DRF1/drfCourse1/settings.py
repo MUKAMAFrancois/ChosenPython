@@ -1,6 +1,10 @@
 
 
 from pathlib import Path
+import dj_database_url
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,12 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(6ciec)tsend#7uz-ad!b%xgc(9j)du#a5o$p6#sl-k^&2@sqd'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -93,6 +97,15 @@ DATABASES = {
     }
 }
 
+
+    
+# }
+db_string=os.getenv('DATABASE_URL')
+DATABASES['default']= dj_database_url.parse(db_string)
+
+#internal db url: postgres://drf_posts_api_user:Fb1KA9jR5J7K3Ao07xOJ1ctU5onZfQsN@dpg-coi2adol5elc73d0ktkg-a/drf_posts_api
+#external bd url: 
+#psql command: PGPASSWORD=Fb1KA9jR5J7K3Ao07xOJ1ctU5onZfQsN psql -h dpg-coi2adol5elc73d0ktkg-a.oregon-postgres.render.com -U drf_posts_api_user drf_posts_api
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
