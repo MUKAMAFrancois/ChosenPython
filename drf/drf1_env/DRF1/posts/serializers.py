@@ -1,13 +1,25 @@
 from rest_framework import serializers
 from .models import Post
-import uuid
 
 class PostSerializer(serializers.ModelSerializer):
-    id = serializers.UUIDField(read_only=True)
+    id = serializers.UUIDField(read_only=True, help_text='The unique identifier of the post')
+    title = serializers.CharField(
+        max_length=100,
+        help_text='The title of the post',
+        label='Title',
+        required=True
+    )
+    content = serializers.CharField(
+        style={'base_template': 'textarea.html'},
+        help_text='The content of the post',
+        label='Content',
+        required=True
+    )
+    author = serializers.ReadOnlyField(source='author.username')
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'content']
+        fields = ['id', 'title', 'content','author','date_posted']
 
     def validate_title(self, value):
         existing_title = Post.objects.filter(title=value).exists()
