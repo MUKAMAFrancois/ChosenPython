@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import dj_database_url
+from datetime import timedelta
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',#
     'rest_framework.authtoken',
     'drf_yasg',
+    'rest_framework_simplejwt',
 ]
 #
 REST_FRAMEWORK = {
@@ -45,19 +47,44 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 
-    # "DEFAULT_PERMISSION_CLASSES": [
-    #     "rest_framework.permissions.IsAuthenticated",
-    # ],
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         "rest_framework.permissions.IsAuthenticated",
+#     ],
+
+"DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+"PAGE_SIZE":2,
+ }
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY":SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "USER_ID_FIELD": "id",
+
+}
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
 }
 
 AUTH_USER_MODEL = 'accounts.User'#
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -99,7 +126,7 @@ DATABASES = {
 
 
     
-# }
+# # 
 db_string=os.getenv('DATABASE_URL')
 DATABASES['default']= dj_database_url.parse(db_string)
 
@@ -141,6 +168,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT= os.path.join(BASE_DIR,'assets')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
