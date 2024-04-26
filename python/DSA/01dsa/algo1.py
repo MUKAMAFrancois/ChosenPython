@@ -64,3 +64,56 @@
 # *If the current element does not match the target element, move to the next element in the sequence.
 # *Repeat steps 2-4 until either the target element is found or the end of the sequence is reached.
 # *If the target element is not found after traversing the entire sequence, return a value indicating that the element is not present (e.g., -1).
+
+
+
+def linear_search(listObj,target):
+
+    for i in range(len(listObj)):
+        if listObj[i] == target:
+            return i
+    return None
+
+
+
+def verify(index):
+
+    if isinstance(index,int):
+        print(f"Target found at index: {index}")
+    else:
+        print("Target not found in the list")
+
+
+numbers=[num for num in range(1,11)]
+target=5
+index=linear_search(numbers,target)
+verify(index) # Target found at index: 4
+
+
+
+
+# 2.=> Binary Search Algorithm
+
+# Binary Search is an efficient algorithm for finding the position or index of a target element in a sorted array or list. It follows a divide-and-conquer approach, repeatedly dividing the search interval in half until the target element is found or determined not to exist in the array.
+
+
+# Prerequisite: The array or list must be sorted in ascending or descending order.
+# Steps:
+# a. Initialize two pointers: low (pointing to the first element) and high (pointing to the last element) of the sorted array or list.
+# b. Calculate the middle index as mid = (low + high) // 2.
+# c. Compare the element at the middle index (arr[mid]) with the target element.
+# d. If the element at the middle index is equal to the target element, return the middle index as the position of the target element.
+# e. If the element at the middle index is greater than the target element, the target must lie in the left half of the array. Update high = mid - 1 and go to step b.
+# f. If the element at the middle index is smaller than the target element, the target must lie in the right half of the array. Update low = mid + 1 and go to step b.
+# g. If the loop terminates without finding the target element, return an appropriate value (e.g., -1) indicating that the element is not present in the array.
+# Time Complexity:
+
+# The time complexity of Binary Search is O(log n), 
+# where n is the size of the input array or list. 
+# This logarithmic time complexity makes Binary Search highly efficient for large sorted data sets.
+
+
+# Space Complexity:
+
+# The space complexity of Binary Search is O(1), 
+# as it uses a constant amount of extra space, regardless of the input size.
