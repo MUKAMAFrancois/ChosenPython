@@ -117,3 +117,40 @@ verify(index) # Target found at index: 4
 
 # The space complexity of Binary Search is O(1), 
 # as it uses a constant amount of extra space, regardless of the input size.
+
+
+
+
+def binary_search(listObj,target):
+    
+    first =0
+    last =len(listObj)
+    
+    while first <= last:
+        midpoint = (last + first) // 2
+        
+        if listObj[midpoint] == target:
+            return midpoint
+        
+        else:
+            if target < listObj[midpoint]:
+                last = midpoint
+            elif target > listObj[midpoint]:
+                first = midpoint
+    
+
+
+def verify(index):
+
+    if isinstance(index,int):
+        print(f"Target found at index: {index}")
+    else:
+        print("Target not found in the list")
+        
+numbers=[num for num in range(0,11)]
+target=5
+index=binary_search(numbers,target)
+verify(index) 
+
+        
+        

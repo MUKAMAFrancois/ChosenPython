@@ -109,9 +109,21 @@ class Node:
     def __repr__(self):
         return "<Node data: %s>" % self.data
 
+
+#  python -i ds1.py  to run the code in interactive mode
+#  node1 = Node(10)
+#  node2 = Node(2)
+#  node1.next_node = node2
+    #node1
+    # <Node data: 10>
+#  node1.next_node
+    #  <Node data: 2>
+
 class SinglyLinkedList:
     """
-    Linear data structure that stores values in nodes. The list maintains a reference to the first node, also called head. Each node points to the next node in the list
+    Linear data structure that stores values in nodes.
+    The list maintains a reference to the first node, also called head.
+    Each node points to the next node in the list
 
     Attributes:
         head: The head node of the list
@@ -140,8 +152,167 @@ class SinglyLinkedList:
         return self.__count
     
 
+    def size(self):
+        """
+        Returns the length of the linked list
+        Takes O(n) time
+        """
+
+        current = self.head
+        count = 0
+
+        while current:
+            count += 1
+            current = current.next_node
+
+        return count
+
+
+l = SinglyLinkedList()
+l.is_empty() # True
+l.size() # 0
+
+
+
+# Linked lists are widely used in various applications and algorithms due to their dynamic nature and efficient handling of insertion and deletion operations. 
+# Here are some common use cases where linked lists are employed:
+
+# 1. **File Systems**: Linked lists are used to implement file system operations, such as maintaining directory structures and managing file allocation tables.
+
+# 2. **Memory Management**: In dynamic memory allocation systems, linked lists are used to keep track of free memory blocks and allocated memory blocks.
+
+# 3. **Compiler Design**: Linked lists are used in compiler design for tasks like symbol table management, syntax tree construction, and code generation.
+
+# 4. **Undo/Redo Operations**: Linked lists are often used to implement undo/redo functionality in text editors, word processors, and other applications that require tracking changes to data.
+
+# 5. **Blockchain**: In blockchain technology, linked lists are used to store and manage transactions in a decentralized and secure manner.
+
+# 6. **Multimedia Applications**: Linked lists are used in multimedia applications for tasks like maintaining playlists, managing video frames, and handling audio/video data streams.
+
+# 7. **Adjacency Lists in Graphs**: In graph data structures, adjacency lists, which are implemented using linked lists, are used to represent the edges of a graph efficiently.
+
+# 8. **Hash Tables**: Linked lists are commonly used to handle collisions in hash table implementations, such as separate chaining and open addressing with linked lists.
+
+# 9. **Circular Buffers**: Circular linked lists are used to implement circular buffers, which are useful in scenarios like event handling, message queuing, and data streaming.
+
+# 10. **Polynomial Representation**: In computer algebra systems, linked lists are used to represent and manipulate polynomials efficiently.
+
+# 11. **Sparse Matrices**: Linked lists are used to represent and perform operations on sparse matrices, where most of the elements are zero, saving memory and improving computational efficiency.
+
+# 12. **Caching and Least Recently Used (LRU) Caches**: Linked lists are used to implement caching algorithms, such as the Least Recently Used (LRU) cache, which is used in web browsers, databases, and other systems that require efficient cache management.
+
+# The flexibility of linked lists in handling dynamic data and their efficient insertion and deletion operations make them a popular choice in various applications where data needs to be stored, organized, and manipulated efficiently.
+
+# However, it's important to note that linked lists have limitations when it comes to random access and memory usage due to the extra overhead of storing pointers.
+# In scenarios where random access is more important or memory usage is critical, 
+# other data structures like arrays or certain tree-based structures may be more suitable.
 
 
 #2.1. Operations  on Linked Lists
 
 
+
+
+
+# Basic Operations:
+
+# Insertion: Adding a new node to the linked list at the beginning, end, or a specific position.
+# Deletion: Removing an existing node from the linked list.
+# Traversal: Accessing and processing each node in the linked list.
+# Search: Finding a specific node or element in the linked list.
+    
+
+class Node:
+
+    def __init__(self,data):
+        self.data = data
+        self.next= None
+
+
+class LinkedList:
+
+    def __init__(self):
+        self.head = None
+
+
+    def insert_at_beginning(self,data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    
+    def insert_at_end(self,data):
+        ending_node = Node(data)
+        if self.head is None:
+            self.head = ending_node
+            return
+        
+        last = self.head
+        while last.next is not None:
+            last = last.next
+        
+        last.next = ending_node
+
+    def insert_after_node(self,prev_node,data):
+
+        new_node = Node(data)
+        if prev_node is None:
+            print("Prevoius node must be not null")
+            return
+        
+        new_node.next = prev_node.next
+        prev_node.next = new_node
+
+
+    def delete_node(self,key):
+
+        curr_node = self.head
+        if curr_node and curr_node.data == key:
+            self.head = curr_node.next
+            curr_node = None
+            return
+        
+        prevNode= None
+        while curr_node and curr_node.data != key:
+            prevNode = curr_node
+            curr_node = curr_node.next
+
+        if curr_node is None:
+            print("The data is not found in the list")
+            return
+        
+        prevNode.next = curr_node.next
+        curr_node = None
+        
+
+    def search(self,key):
+        curr_node = self.head
+
+        while curr_node:
+            if curr_node.data == key:
+                return True
+            curr_node = curr_node.next
+        return False
+
+
+    #traversal
+        
+    def print_list(self):
+        current_node= self.head
+
+        while current_node:
+            print(current_node.data, end="->")
+            current_node = current_node.next
+        
+        print("None")
+
+
+
+
+
+linked_list = LinkedList()
+linked_list.insert_at_beginning(10)
+linked_list.insert_at_beginning(20)
+linked_list.print_list()
+     
+    
