@@ -16,45 +16,48 @@
 # Here's an example implementation of the Merge Sort algorithm in Python:
 
 
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
+def merge_sort(listObj):
+    
+    if len(listObj) <=1:
+        return listObj
+        
+    midpoint= len(listObj)//2
+    left_half= listObj[:midpoint]
+    right_half = listObj[midpoint:]
+    
+    left=merge_sort(left_half)
+    right= merge_sort(right_half)
+    
+    return merge(left,right)
+    
 
-    # Divide the array into two halves
-    mid = len(arr) // 2
-    left_half = arr[:mid]
-    right_half = arr[mid:]
-
-    # Recursively sort the two halves
-    left_half = merge_sort(left_half)
-    right_half = merge_sort(right_half)
-
-    # Merge the sorted halves
-    return merge(left_half, right_half)
-
-def merge(left, right):
-    merged = []
-    left_idx = right_idx = 0
-
-    # Merge the sorted halves into a single sorted array
-    while left_idx < len(left) and right_idx < len(right):
-        if left[left_idx] <= right[right_idx]:
-            merged.append(left[left_idx])
-            left_idx += 1
-        else:
-            merged.append(right[right_idx])
-            right_idx += 1
-
-    # Append remaining elements from the non-empty half
-    merged.extend(left[left_idx:])
-    merged.extend(right[right_idx:])
-
+def merge(left,right):
+    
+    left_index=0
+    right_index=0
+    merged=[]
+    
+    while left_index <len(left) and right_index <len(right):
+        
+        if left[left_index] <= right[right_index]:
+            merged.append(left[left_index])
+            
+            left_index +=1
+        
+        merged.append(right[right_index])
+        right_index +=1
+            
+    merged.extend(left[left_index:])
+    merged.extend(right[right_index:])
+        
     return merged
+    
+nums=[34,12,44,2,5]
 
-# Example usage
-unsorted_list = [5, 2, 8, 1, 9, 3, 7, 4, 6]
-sorted_list = merge_sort(unsorted_list)
-print(sorted_list)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(merge_sort(nums))
+        
+    
+    
 
 
 # In this implementation, the `merge_sort` function recursively divides the input array into two halves until the base case is reached (arrays of length 0 or 1).
@@ -79,3 +82,110 @@ print(sorted_list)  # Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 # Overall, Merge Sort is a reliable and efficient sorting algorithm that is 
 # widely used in computer science and programming due to its time complexity, stability, and ability to be parallelized.
+
+
+
+
+
+
+
+# Let's see merge sort for linked lists.
+
+from ds1 import LinkedList
+
+l= LinkedList()
+
+def merge_sort_linked_list(linked_list):
+    """
+    Sorts a linked list in ascending order
+    - Recursively divide the linked list into sublists containing a single node
+    - Repeatedly merge the sublists to produce sorted sublists until one remains
+
+    Returns a sorted linked list 
+    """
+
+    if linked_list.size() == 1:
+        return linked_list
+    elif linked_list.head is None:
+        return linked_list
+
+    left_half, right_half = split(linked_list)
+    left = merge_sort_linked_list(left_half)
+    right = merge_sort_linked_list(right_half)
+
+    return merge(left, right)
+
+
+def split(linked_list):
+    """
+    Divide the unsorted list at midpoint into sublists
+    Takes O(k log n) time
+    """
+
+
+    if linked_list is None or linked_list.head is None:
+        left_half = linked_list
+        right_half = None
+
+        return left_half, right_half
+    else:
+        size= linked_list.size()
+        mid= size//2
+
+        node_at_mid = linked_list.node_at_index(mid-1)  # size will return the length greater by 1 than the last index
+        left_half = linked_list
+        right_half = LinkedList() # empty linked list
+        right_half.head = node_at_mid.next
+        node_at_mid.next = None
+
+        return left_half, right_half
+    
+
+
+def merge(left,right):
+    """
+    Merges two linked lists, sorting by data in nodes
+    Returns a new, merged list
+    """
+
+    merged = LinkedList()
+
+    #set current to the head if the linked list
+    current = merged.head
+    # Obtain head nodes for left and right linked lists
+    left_head = left.head
+    right_head = right.head
+
+    while left_head or right_head:
+    # If the head node of left is None, we're at the tail
+        
+        if left_head is None:
+            current.next =right_head
+            right_head = right_head.next
+
+        # If the head node of right is None, we're at the tail
+        elif right_head is None:
+            current.next = left_head
+            left_head = left_head.next
+
+        else:
+            left_data = left_head.data
+            right_data = right_head.data
+
+            if left_data < right_data:
+                current.next = left_head
+                left_head = left_head.next
+
+            else:
+                current.next = right_head
+                right_head = right_head.next
+        
+        current=current.next
+
+    # Discard fake head and set first merged node as head
+    head = merged.head.next
+    merged.head = head
+
+    return merged
+
+

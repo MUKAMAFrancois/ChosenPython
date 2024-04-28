@@ -93,7 +93,7 @@ print(fruits)  # Output: ['apple', 'banana', 'cherry', 'orange', 'grape']
 
 
 
-class Node:
+class Noode:
     """
     An object for storing a single node in a linked list
 
@@ -284,6 +284,30 @@ class LinkedList:
         prevNode.next = curr_node.next
         curr_node = None
         
+
+    def size(self):
+        current = self.head
+        count = 0
+
+        while current:
+            count += 1
+            current = current.next
+
+        return count
+    
+    def node_at_index(self,index):
+        if index == 0:
+            return self.head
+        else:
+            current= self.head
+            position = 0
+
+            while position < index:
+                current = current.next
+                position += 1
+            return current
+        
+
 
     def search(self,key):
         curr_node = self.head
